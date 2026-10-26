@@ -1,0 +1,8 @@
+.git
+.venv
+.devcontainer
+**/__pycache__
+web/node_modules
+web/build
+web/.react-router
+*.pdf

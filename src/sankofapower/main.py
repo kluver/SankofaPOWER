@@ -1,4 +1,10 @@
-from fastapi import FastAPI
+from typing import Annotated
+
+from fastapi import Depends, FastAPI
+from sqlalchemy import text
+from sqlalchemy.orm import Session
+
+from sankofapower.db import get_db
 
 app = FastAPI()
 
@@ -11,6 +17,12 @@ if not app.debug:
 @app.get("/api/")
 def read_root():
     return {"Hello": "World"}
+
+
+@app.get("/api/health")
+def health(db: Annotated[Session, Depends(get_db)]):
+    postgis = db.execute(text("SELECT postgis_lib_version()")).scalar_one()
+    return {"status": "ok", "postgis": postgis}
 
 
 @app.get("/api/items/{item_id}")
