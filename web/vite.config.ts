@@ -9,7 +9,8 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/api': 'http://localhost:8000',
+      // docker compose sets API_URL so the web container can reach the api container
+      '/api': process.env.API_URL ?? 'http://localhost:8000',
       },
     },
   });

@@ -1,14 +1,18 @@
 [project]
 name = "sankofapower"
 version = "0.1.0"
-description = "Add your description here"
+description = "Community resource-sharing platform with geographic awareness"
 readme = "README.md"
 authors = [
     { name = "Daniel Kluver", email = "kluve018@umn.edu" }
 ]
 requires-python = ">=3.12"
 dependencies = [
+    "alembic>=1.20.1",
     "fastapi[standard]>=0.143.0",
+    "geoalchemy2>=0.20.0",
+    "psycopg[binary]>=3.3.6",
+    "sqlalchemy>=2.1.6",
 ]
 
 [project.scripts]

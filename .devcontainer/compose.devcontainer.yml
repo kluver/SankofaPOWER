@@ -1,0 +1,21 @@
+# Layered on top of ../docker-compose.yml by devcontainer.json.
+# Paths here are relative to the repo root (the first compose file's folder).
+services:
+  workspace:
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - .:/workspaces/SankofaPOWER:cached
+      - devcontainer-node-modules:/workspaces/SankofaPOWER/web/node_modules
+    environment:
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@db:5432/postgres
+      UV_PROJECT_ENVIRONMENT: /home/vscode/.venv
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  devcontainer-node-modules:
