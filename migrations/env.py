@@ -20,6 +20,14 @@ if config.config_file_name is not None:
 # target_metadata = mymodel.Base.metadata
 target_metadata = Base.metadata
 
+
+def include_object(obj, name, type_, reflected, compare_to):
+    # Ignore tables our models don't define, like the TIGER geocoder tables the
+    # PostGIS image installs. (Dropping a model's table then needs a hand-written migration.)
+    if type_ == "table" and reflected and compare_to is None:
+        return False
+    return alembic_helpers.include_object(obj, name, type_, reflected, compare_to)
+
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
@@ -42,7 +50,7 @@ def run_migrations_offline() -> None:
     context.configure(
         url=url,
         target_metadata=target_metadata,
-        include_object=alembic_helpers.include_object,
+        include_object=include_object,
         process_revision_directives=alembic_helpers.writer,
         render_item=alembic_helpers.render_item,
         literal_binds=True,
@@ -64,7 +72,7 @@ def run_migrations_online() -> None:
         context.configure(
             connection=connection,
             target_metadata=target_metadata,
-            include_object=alembic_helpers.include_object,
+            include_object=include_object,
             process_revision_directives=alembic_helpers.writer,
             render_item=alembic_helpers.render_item,
         )
