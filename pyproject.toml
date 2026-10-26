@@ -1,7 +1,7 @@
 [project]
 name = "sankofapower"
 version = "0.1.0"
-description = "Add your description here"
+description = "Community resource-sharing platform with geographic awareness"
 readme = "README.md"
 authors = [
     { name = "Daniel Kluver", email = "kluve018@umn.edu" }

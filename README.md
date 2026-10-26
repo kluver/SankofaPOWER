@@ -14,6 +14,20 @@ Tech stack stuff:
 Write a better readme.
 
 
+## Project layout
+
+```
+docs/requirements.pdf      Product requirements (April 2026)
+src/sankofapower/          FastAPI backend
+  main.py                    API routes
+  db.py                      Database connection
+migrations/                Alembic database migrations
+web/                       React frontend (see web/README.md)
+docker-compose.yml         Dev stack: database, API, web app
+Dockerfile                 Production image
+.devcontainer/             VS Code dev container (reuses docker-compose.yml)
+```
+
 ## Running it for development
 
 You need [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running.
